@@ -23,7 +23,7 @@ export const WrapperInfoUser = styled.div`
     font-weight: bold;
   }
 `
-export const WrapperStatusCounter = styled.div`
+export const WrapperStatusCount = styled.div`
     display: flex; 
     align-items: center;
     div {margin: 8px;
@@ -33,7 +33,9 @@ export const WrapperUserGeneric = styled.div`
     display: flex; 
     align-items: center;
     margin-top: 8px;
-    h3{ margin-right: 8px; }
+    
+    h3{ 
+      margin-right: 8px; }
     a { 
         color: blue; 
         font-size: 14px; 

@@ -1,6 +1,6 @@
 import React ,{useState}from 'react'
 import * as S from "./styled";
-import useGithub from "../hooks/GithubHooks";
+import useGithub from "../../hooks/GithubHooks";
 
 const Header = () => {
     const { getUser } = useGithub();

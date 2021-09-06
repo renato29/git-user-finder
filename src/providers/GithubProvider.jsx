@@ -1,38 +1,46 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useCallback, useState } from 'react'
 import api from '../api/api';
 
-
-export const GithubContext = createContext({
+ export const GithubContext = createContext({
     loading: false,
     user: {},
     repositories: [],
     starred: [],
-});
+  });
+
+
 
 const GithubProvider = ({ children }) => {
-
     const [githubState, setGithubState] = useState({
         loading: false,
         user: {
+            id: undefined,
+            avatar: undefined,
             login: undefined,
-            nome: "Renato",
+            name: undefined,
             html_url: undefined,
             blog: undefined,
             company: undefined,
             location: undefined,
             followers: 0,
             following: 0,
-            public_gist: 0,
+            public_gists: 0,
             public_repos: 0,
         },
         repositories: [],
         starred: [],
-
     });
 
 
     const getUser = (username) => {
-        api.get(`users/${username}`).then(({ data: { user } }) => {
+        setGithubState((prevState) => ({
+            ...prevState,
+            loading: !prevState.loading,
+          }));
+
+        api
+        .get(`users/${username}`)
+        .then(( { data } ) => {
             setGithubState((prevState) => ({
                 ...prevState,
                 user: {
@@ -53,12 +61,32 @@ const GithubProvider = ({ children }) => {
         })
     }
 
-
+    const getUserRepos = (username) => { 
+        api.get(`users/${username}/repos`)
+        .then(({ data })=>{
+            console.log("data: " + JSON.stringify(data));
+            setGithubState((prevState)=>({
+                ...prevState,
+                repositories: data,
+            }))
+        })
+    };
+    const getUserStarred = (username) => { 
+        api.get(`users/${username}/starred`)
+        .then(({ data })=>{
+            console.log("data: " + JSON.stringify(data));
+            setGithubState((prevState)=>({
+                ...prevState,
+                starred: data,
+            }))
+        })
+    };
 
     const contextValue = {
         githubState,
         getUser: useCallback((username) => getUser(username), []),
-
+        getUserRepos: useCallback((username) => getUserRepos(username), []),
+    getUserStarred: useCallback((username) => getUserStarred(username), []),
     }
 
     return (
@@ -67,6 +95,6 @@ const GithubProvider = ({ children }) => {
         </GithubContext.Provider>
     );
 
-    
+}
     
     export default GithubProvider;

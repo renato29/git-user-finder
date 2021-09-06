@@ -1,13 +1,20 @@
-import React from "react";
-import useGithub from "../../hooks/github-hooks";
+import React ,{useEffect}from "react";
+import useGithub from "../../hooks/GithubHooks";
 import * as S from "./styled";
 
 const Profile = () => {
   const { githubState } = useGithub();
 
+  useEffect(() => {
+      console.log(githubState.user)
+      return () => {
+          
+      }
+  }, [githubState])
+
   return (
     <S.Wrapper>
-      <S.WrapperImage src={githubState.user.avatar} alt="Avatar of user" />
+      <S.WrapperImg src={githubState.user.avatar} alt="Avatar of user" />
       <S.WrapperInfoUser>
         <div>
           <h1>{githubState.user.name}</h1>
