@@ -29,7 +29,7 @@ export const WrapperStatusCounter = styled.div`
     div {margin: 8px;
     text-align: center;}
 `
-export const WrapperUserName = styled.div`
+export const WrapperUserGeneric = styled.div`
     display: flex; 
     align-items: center;
     margin-top: 8px;
