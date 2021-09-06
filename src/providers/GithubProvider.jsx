@@ -64,7 +64,7 @@ const GithubProvider = ({ children }) => {
     }
 
     const getUserRepos = (username) => { 
-        api.get(`users/${username}/repos`)
+        api.get(`users/${githubState.user.login}/repos`)
         .then(({ data })=>{
             console.log("data: " + JSON.stringify(data));
             setGithubState((prevState)=>({
@@ -89,7 +89,7 @@ const GithubProvider = ({ children }) => {
         githubState,
         getUser: useCallback((username) => getUser(username), []),
         getUserRepos: useCallback((username) => getUserRepos(username), []),
-    getUserStarred: useCallback((username) => getUserStarred(username), []),
+        getUserStarred: useCallback((username) => getUserStarred(username), []),
     }
 
     return (

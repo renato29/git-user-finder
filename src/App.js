@@ -14,12 +14,13 @@ function App() {
           (
             <p>Loading...</p>
           ) : (
-            <><Profile />
-              <Repos /></>
+            <>
+              <Profile />
+              <Repos />
+            </>
           )}
         </>
       ) : (<NoSearch />)}
-
     </Layout>
 
 

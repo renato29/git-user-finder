@@ -5,13 +5,6 @@ import * as S from "./styled";
 const Profile = () => {
   const { githubState } = useGithub();
 
-  useEffect(() => {
-      console.log(githubState.user)
-      return () => {
-          
-      }
-  }, [githubState])
-
   return (
     <S.Wrapper>
       <S.WrapperImg src={githubState.user.avatar} alt="Avatar of user" />
