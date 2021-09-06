@@ -17,11 +17,11 @@ const Header = () => {
             <S.Wrapper>
                 <input
                 type="text"
-                placeholder="Digite o username para pesquisa..."
+                placeholder="Enter username to search..."
                 onChange={(event) => setUsernameForSearch(event.target.value)}
                 />
             <button type="submit" onClick={submitGetUser}>
-            <span>Buscar</span>
+            <span>Search</span>
             </button>
         </S.Wrapper></header>
         )
