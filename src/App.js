@@ -2,20 +2,26 @@ import React from 'react';
 import Layout from './components/layout/Layout';
 import Profile from './components/profile/Profile'
 import Repos from './components/repositories/Repos';
-import { ResetCSS } from './styles/ResetCSS';
-import GithubProvider from '../src/providers/GithubProvider'
+import useGithub from './hooks/GithubHooks';
 
 function App() {
+  const { githubState } = useGithub(() => { })
   return (
-    <main>
-      <GithubProvider>
-        <ResetCSS />
-        <Layout> 
-          <Profile />
-          <Repos />
-        </Layout>
-      </GithubProvider>
-    </main>
+    <Layout>
+      {githubState.hasUser ? (
+        <> {githubState.loading ?
+          (
+            <p>Loading...</p>
+          ) : (
+            <><Profile />
+              <Repos /></>
+          )}
+        </>
+      ) : (<h3>Type a Github user nickname and click Search</h3>)}
+
+    </Layout>
+
+
   );
 }
 

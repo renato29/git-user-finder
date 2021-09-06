@@ -1,14 +1,13 @@
 import React, { createContext, useCallback, useState } from 'react'
 import api from '../api/api';
 
- export const GithubContext = createContext({
+export const GithubContext = createContext({
+   hasUser: false,
     loading: false,
     user: {},
     repositories: [],
     starred: [],
   });
-
-
 
 const GithubProvider = ({ children }) => {
     const [githubState, setGithubState] = useState({
@@ -31,18 +30,17 @@ const GithubProvider = ({ children }) => {
         starred: [],
     });
 
-
     const getUser = (username) => {
         setGithubState((prevState) => ({
             ...prevState,
             loading: !prevState.loading,
           }));
-
         api
         .get(`users/${username}`)
         .then(( { data } ) => {
             setGithubState((prevState) => ({
                 ...prevState,
+                hasUser: true,
                 user: {
                     id: data.id,
                     avatar: data.avatar_url,
@@ -57,8 +55,12 @@ const GithubProvider = ({ children }) => {
                     public_gists: data.public_gists,
                     public_repos: data.public_repos,
                 },
-            }));
-        })
+            }));  
+        }).finally(() => {
+            setGithubState((prevState) => ({
+              ...prevState,
+              loading: !prevState.loading,
+            }))});
     }
 
     const getUserRepos = (username) => { 
@@ -71,6 +73,7 @@ const GithubProvider = ({ children }) => {
             }))
         })
     };
+    
     const getUserStarred = (username) => { 
         api.get(`users/${username}/starred`)
         .then(({ data })=>{
