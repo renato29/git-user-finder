@@ -13,7 +13,7 @@ const Repos = () => {
             getUserStarred(githubState.user.login);
         }
         setHasUserForSearchRepos(githubState.repositories);
-    }, [githubState.user.login ])
+    },[githubState.user.login])
 
     return (
         <>
