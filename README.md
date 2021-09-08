@@ -1,3 +1,7 @@
+# Github API Interface for user search 
+  
+ With this application, any user are able to search a github user and take a look for repositories and starred repos, to share knowledge. Based in React, React tabs and styled components. It was develop based in a Digital Innovation challenge :: web.digitalinnovation.one :: 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
